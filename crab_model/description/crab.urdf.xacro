@@ -1,106 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="spider_crab">
 
-  <!-- 材质定义 -->
-  <material name="crab_red">
-    <color rgba="0.8 0.3 0.3 1"/>
-  </material>
-  <material name="crab_white">
-    <color rgba="0.9 0.9 0.9 1"/>
-  </material>
+  <xacro:arg name="use_ros2_control" default="false"/>
+  <xacro:arg name="sim_mode" default="true"/>
 
-  <!-- 常量 -->
-  <xacro:property name="body_radius" value="0.15"/>
-  <xacro:property name="body_length" value="0.2"/>
-  <xacro:property name="leg_length1" value="0.5"/>
-  <xacro:property name="leg_length2" value="0.4"/>
-  <xacro:property name="leg_length3" value="0.3"/>
-  <xacro:property name="leg_radius" value="0.02"/>
-  <xacro:property name="PI" value="3.1415926535897931"/>
+  <xacro:include filename="crab_core.xacro"/>
 
-  <!-- 身体 -->
-  <link name="base_link">
-    <visual>
-      <geometry>
-        <sphere radius="${body_radius}"/>
-      </geometry>
-      <material name="crab_red"/>
-    </visual>
-  </link>
+  <xacro:if value="$(arg use_ros2_control)">
+    <xacro:include filename="crab_ros2_control.xacro"/>
+  </xacro:if>
 
-  <!-- 腿宏定义：可按需要加更多关节 -->
-  <xacro:macro name="crab_leg" params="prefix angle">
-    <!-- 髋关节 -->
-    <joint name="${prefix}_hip_joint" type="revolute">
-      <parent link="base_link"/>
-      <child link="${prefix}_upper"/>
-      <origin xyz="${body_radius*cos(angle)} ${body_radius*sin(angle)} 0" rpy="0 0 ${angle}"/>
-      <axis xyz="0 0 1"/>
-      <limit lower="-1.5" upper="1.5" effort="10" velocity="2"/>
-    </joint>
-
-    <!-- 大腿 -->
-    <link name="${prefix}_upper">
-      <visual>
-        <geometry>
-          <cylinder radius="${leg_radius}" length="${leg_length1}"/>
-        </geometry>
-        <origin xyz="0 0 ${-leg_length1/2}" rpy="0 0 0"/>
-        <material name="crab_white"/>
-      </visual>
-    </link>
-
-    <!-- 膝关节 -->
-    <joint name="${prefix}_knee_joint" type="revolute">
-      <parent link="${prefix}_upper"/>
-      <child link="${prefix}_middle"/>
-      <origin xyz="0 0 ${-leg_length1}" rpy="0 0 0"/>
-      <axis xyz="0 1 0"/>
-      <limit lower="-2" upper="2" effort="10" velocity="2"/>
-    </joint>
-
-    <!-- 小腿 -->
-    <link name="${prefix}_middle">
-      <visual>
-        <geometry>
-          <cylinder radius="${leg_radius}" length="${leg_length2}"/>
-        </geometry>
-        <origin xyz="0 0 ${-leg_length2/2}" rpy="0 0 0"/>
-        <material name="crab_red"/>
-      </visual>
-    </link>
-
-    <!-- 脚关节&脚爪 -->
-    <joint name="${prefix}_ankle_joint" type="revolute">
-      <parent link="${prefix}_middle"/>
-      <child link="${prefix}_tip"/>
-      <origin xyz="0 0 ${-leg_length2}" rpy="0 0 0"/>
-      <axis xyz="0 1 0"/>
-      <limit lower="-2" upper="2" effort="10" velocity="2"/>
-    </joint>
-    <link name="${prefix}_tip">
-      <visual>
-        <geometry>
-          <cylinder radius="${leg_radius*0.8}" length="${leg_length3}"/>
-        </geometry>
-        <origin xyz="0 0 ${-leg_length3/2}" rpy="0 0 0"/>
-        <material name="crab_white"/>
-      </visual>
-    </link>
-  </xacro:macro>
-
-  <!-- 生成12条腿，分布在身体两侧，每30度一条 -->
-  <xacro:crab_leg prefix="leg1" angle="0"/>
-  <xacro:crab_leg prefix="leg2" angle="${PI/6}"/>
-  <xacro:crab_leg prefix="leg3" angle="${PI/3}"/>
-  <xacro:crab_leg prefix="leg4" angle="${PI/2}"/>
-  <xacro:crab_leg prefix="leg5" angle="${2*PI/3}"/>
-  <xacro:crab_leg prefix="leg6" angle="${5*PI/6}"/>
-  <xacro:crab_leg prefix="leg7" angle="${PI}"/>
-  <xacro:crab_leg prefix="leg8" angle="${7*PI/6}"/>
-  <xacro:crab_leg prefix="leg9" angle="${4*PI/3}"/>
-  <xacro:crab_leg prefix="leg10" angle="${3*PI/2}"/>
-  <xacro:crab_leg prefix="leg11" angle="${5*PI/3}"/>
-  <xacro:crab_leg prefix="leg12" angle="${11*PI/6}"/>
 
 </robot>

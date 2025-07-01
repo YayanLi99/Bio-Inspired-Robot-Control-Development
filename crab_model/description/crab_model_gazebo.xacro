@@ -2,10 +2,10 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="crab">
 
 <!-- Build the body frame -->
-	<link name="base_link" />
+	<link name="cam1" />
 
 	<joint name="base_joint" type="fixed">
-		<parent link="base_link" />
+		<parent link="cam1" />
 		<child link="thorax" />
 		<origin xyz="0 0 0" rpy="0 0 0" />
 	</joint>			

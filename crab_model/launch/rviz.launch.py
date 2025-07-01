@@ -25,12 +25,18 @@ def generate_launch_description():
     # rviz_config_file = os.path.join(pkg_path, 'description', 'crab.rviz')
 
     # Create a robot_state_publisher node
-    params = {'robot_description': robot_description_config.toxml(), 'use_sim_time': use_sim_time}
+    params = {'robot_description': robot_description_config.toxml(), 'sim_mode': use_sim_time}
     node_robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
         parameters=[params]
+    )
+
+    joint_state_publisher_gui = Node(
+        package='joint_state_publisher_gui',
+        executable='joint_state_publisher_gui',
+        name='joint_state_publisher_gui'
     )
 
     rviz_node = Node(
@@ -57,5 +63,6 @@ def generate_launch_description():
         ),
 
         node_robot_state_publisher,
+        joint_state_publisher_gui,
         rviz_node
     ])

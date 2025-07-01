@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Import Rviz colors -->
+    <xacro:include filename="colors.xacro"/>
+    <xacro:include filename="inertial_macros.xacro"/>
+    <!-- BASE_FOOTPRINT LINK -->
+
+    <link name = "base_link"></link>
+
+    <joint name = 'base_footprint_joint' type = "fixed">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="base_footprint"/>
+    </joint>
+
+    <link name="base_footprint"></link>
+
+    <!-- BODY JOINT AND LINK -->
+    <!-- BODY joint will be made non fixed when the whole robot is ready-->
+
+    <joint name="body_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.8" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="body_link"/>
+    </joint>
+
+    <link name="body_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.2 0.0"/>
+            <geometry>
+                <box size="0.5 0.3 0.05"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+    </link>
+
+
+
+
+
+</robot>
