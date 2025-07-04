@@ -2,13 +2,42 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="spider_crab">
 
   <xacro:arg name="use_ros2_control" default="false"/>
-  <xacro:arg name="sim_mode" default="true"/>
+  <xacro:arg name="use_sim_time" default="false"/>
 
-  <xacro:include filename="crab_core.xacro"/>
+  <xacro:include filename="crab_legs.xacro"/>
+  <xacro:include filename="colors.xacro"/>
+  <xacro:include filename="inertial_macros.xacro"/>
+  <xacro:include filename="crab_properties.xacro"/>
+  <!--BASE LINK-->
+  
+  <link name = "base_link"></link>
 
-  <xacro:if value="$(arg use_ros2_control)">
-    <xacro:include filename="crab_ros2_control.xacro"/>
-  </xacro:if>
+  <!-- BODY JOINT AND LINK-->
+
+  <joint name="body_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="body_link"/>
+    <origin xyz="0 0 1.0" rpy="0 0 0"/>
+  </joint>  
+
+  <link name ="body_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.5 1 0.15"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <xacro:leg suffix="R1" reflect="1" Ox="0.3" Oy="0.3" Oz="0.0"/>
+  <xacro:leg suffix="R2" reflect="1" Ox="0.3" Oy="0.0" Oz="0.0"/>
+  <xacro:leg suffix="R3" reflect="1" Ox="0.3" Oy="-0.3" Oz="0.0"/>
+  <xacro:leg suffix="L1" reflect="-1" Ox="-0.3" Oy="0.3" Oz="0.0"/>
+  <xacro:leg suffix="L2" reflect="-1" Ox="-0.3" Oy="0.0" Oz="0.0"/>
+  <xacro:leg suffix="L3" reflect="-1" Ox="-0.3" Oy="-0.3" Oz="0.0"/>  
+  
+
 
 
 </robot>

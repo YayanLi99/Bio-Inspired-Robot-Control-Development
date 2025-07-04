@@ -3,93 +3,108 @@
 
     <xacro:macro name="leg" params="suffix reflect Ox Oy Oz"> 
 
+        <!-- -->
+
         <!-- COXA JOINT AND LINK-->
 
         <joint name="coxa_joint_${suffix}" type="revolute">
                 <origin xyz="${Ox} ${Oy} ${Oz}" rpy="0.0 0.0 0.0"/>
                 <parent link="body_link"/>
                 <child link="coxa_link_${suffix}"/>
-                <limit effort="100" velocity="100.0" lower="-3.14" upper="3.14" />
+                <limit effort="250.0" velocity="10.0" lower="-3.14" upper="3.14" />
                 <axis xyz="0 0 1"/>
                 <dynamics damping="0.7"/>
         </joint>
 
         <link name="coxa_link_${suffix}">
             <visual>
-                <origin xyz="${coxa_link_Ox} ${reflect*coxa_link_Oy} ${coxa_link_Oz}" rpy="0.0 ${coxa_link_Ry} 0.0"/>
+                <origin xyz="${coxa_link_Ox} ${coxa_link_Oy} ${coxa_link_Oz}" rpy=" 0.0  ${coxa_link_Ry} 0.0"/>
                 <geometry>
                     <cylinder length="${coxa_link_length}" radius="${coxa_link_radius}"/>
                 </geometry>
                 <material name="red"/>
             </visual>
-            <collision>
-                <origin xyz="${coxa_link_Ox} ${coxa_link_Oy} ${coxa_link_Oz}" rpy="0.0 ${coxa_link_Ry} 0.0"/>
-                <geometry>
-                    <cylinder length="${coxa_link_length}" radius="${coxa_link_radius}"/>
-                </geometry>
-            </collision>
-            <xacro:inertial_cylinder mass="${coxa_link_mass}" length="${coxa_link_length}" radius="${coxa_link_radius}">
-                <origin xyz="${coxa_link_Ox} ${coxa_link_Oy} ${coxa_link_Oz}" rpy="0.0 ${coxa_link_Ry} 0.0"/>
-            </xacro:inertial_cylinder>
         </link>
 
-        <!-- FEMUR JOINT AND LINK-->
 
-        <joint name="femur_joint_${suffix}" type="revolute">
-            <origin xyz="${femur_joint_Ox} ${reflect*femur_joint_Oy} ${femur_joint_Oz}" rpy="0.0 ${femur_joint_Ry} 0.0"/>
+        <!-- MERUS JOINT AND JOINT-->
+        <joint name="merus_joint_${suffix}" type="revolute">
+            <origin xyz="${reflect*merus_joint_Ox} ${merus_joint_Oy} ${merus_joint_Oz}" rpy="0.0 ${reflect*merus_joint_Ry} 0.0"/>
             <parent link="coxa_link_${suffix}"/>
-            <child link="femur_link_${suffix}"/>
-            <limit effort="100" velocity="100.0" lower="-3.14" upper="3.14" />
-            <axis xyz="0 0 ${reflect}"/>
-            <dynamics damping="0.7"/>
+            <child link="merus_link_${suffix}"/>
+            <limit effort="250.0" velocity="10.0" lower="-3.14" upper="3.14" />            
+            <axis xyz="0 1 0"/>
         </joint>
 
-        <link name="femur_link_${suffix}">
+        <link name="merus_link_${suffix}">
             <visual>
-                <origin xyz="${femur_link_Ox} 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <origin xyz="${merus_link_Ox} ${merus_link_Oy} ${merus_link_Oz}" rpy="0.0 0.0 0.0"/>
                 <geometry>
-                    <box size="${femur_link_dx} ${femur_link_dy} ${femur_link_dz}"/>
+                    <cylinder length="${merus_link_length}" radius="${merus_link_radius}"/>
                 </geometry>
-                <material name="orange"/>
+                <material name="blue"/>
             </visual>
-            <collision>
-                <origin xyz="${femur_link_Ox} 0.0 0.0" rpy="0.0 0.0 0.0"/>
-                <geometry>
-                    <box size="${femur_link_dx} ${femur_link_dy} ${femur_link_dz}"/>
-                </geometry>
-            </collision>
-            <xacro:inertial_box mass="${femur_link_mass}" x="${femur_link_dx}" y="${femur_link_dy}" z='${femur_link_dz}'>
-                <origin xyz="${femur_link_Ox} 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            </xacro:inertial_box>
         </link>
 
-        <!-- TIBIA JOINT AND LINK -->
-        <joint name="tibia_joint_${suffix}" type="revolute">
-            <origin xyz="${tibia_joint_Ox} ${tibia_joint_Oy} ${tibia_joint_Oz}" rpy="0.0 0.0 0.0"/>
-            <parent link="femur_link_${suffix}"/>
-            <child link="tibia_link_${suffix}"/>
-            <limit effort="100" velocity="100.0" lower="-3.14" upper="3.14" />
-            <axis xyz="0 0 ${reflect}"/>
+
+        <!-- CARPUS JOINT AND LINK-->
+
+        <joint name="carpus_joint_${suffix}" type="revolute">
+            <origin xyz="${carpus_joint_Ox} ${carpus_joint_Oy} ${carpus_joint_Oz}" rpy="0.0 ${reflect*carpus_joint_Ry} 0.0"/>
+            <parent link="merus_link_${suffix}"/>
+            <child link="carpus_link_${suffix}"/>
+            <limit effort="250.0" velocity="10.0" lower="-3.14" upper="3.14" />
+            <axis xyz="${reflect} 0 0"/>
             <dynamics damping="0.7"/>
         </joint>
 
-        <link name="tibia_link_${suffix}">
+        <link name="carpus_link_${suffix}">
             <visual>
-                <origin xyz="${tibia_link_Ox} 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <origin xyz="${carpus_link_Ox} ${carpus_link_Oy} ${carpus_link_Oz}" rpy="0.0 0.0 0.0"/>
                 <geometry>
-                    <box size="${tibia_link_dx} ${tibia_link_dy} ${tibia_link_dz}"/>
+                    <cylinder length="${carpus_link_length}" radius = "${carpus_link_radius}"/>
                 </geometry>
-                <material name="black"/>
+                <material name="red"/>
             </visual>
-            <collision>
-                <origin xyz="${tibia_link_Ox} 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </link>
+
+        <!-- MANUS JOINT AND LINK -->
+        <joint name="manus_joint_${suffix}" type="revolute">
+            <origin xyz="${manus_joint_Ox} ${manus_joint_Oy} ${manus_joint_Oz}" rpy="0.0 ${reflect*manus_joint_Ry} 0.0"/>
+            <parent link="carpus_link_${suffix}"/>
+            <child link="manus_link_${suffix}"/>
+            <limit effort="250.0" velocity="10.0" lower="-3.14" upper="3.14" />
+            <axis xyz="0 1 0"/>
+            <dynamics damping="0.7"/>
+        </joint>
+
+        <link name="manus_link_${suffix}">
+            <visual>
+                <origin xyz="0.0 0.0 ${manus_link_Oz}" rpy="0.0 0.0 0.0"/>
                 <geometry>
-                    <box size="${tibia_link_dx} ${tibia_link_dy} ${tibia_link_dz}"/>
+                    <cylinder length="${manus_link_length}" radius = "${manus_link_radius}"/>
                 </geometry>
-            </collision>
-            <xacro:inertial_box mass="${tibia_link_mass}" x="${tibia_link_dx}" y="${tibia_link_dy}" z="${tibia_link_dz}">
-                <origin xyz="${tibia_link_Ox} 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            </xacro:inertial_box>
+                <material name="blue"/>
+            </visual>
+        </link>
+
+        <!-- DACTYL JOINT AND LINK-->
+
+        <joint name="dactyl_joint_${suffix}" type="fixed">
+            <origin xyz="0.0 0.0 -${manus_link_length}" rpy="0.0 0.0 0.0"/>
+            <parent link="manus_link_${suffix}"/>
+            <child link="dactyl_link_${suffix}"/>
+            <dynamics damping="0.7"/>
+        </joint>
+
+        <link name="dactyl_link_${suffix}">
+            <visual>
+                <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <sphere radius="${dactyl_radius}"/>
+                </geometry>
+                <material name="red"/>
+            </visual>
         </link>
 
     </xacro:macro>
