@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <ros2_control name="GazeboSystem" type = "system">
+        <xacro:if value="${arg use_sim_time}">
+            <hardware>
+                <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            </hardware>
+        </xacro:if>
+        <xacro:unless value="${arg use_sim_time}">
+            <hardware>
+                <plugin>dynamixel_hardware/DynamixelHardware</plugin>
+                <!--plugin>silver_dynamixel_hardware/SilverDynamixelHardware</plugin-->
+                <param name="usb_port">/dev/ttyUSB0</param>
+                <param name="baud_rate">1000000</param>
+            </hardware>
+        </xacro:unless>
+        <joint name = "" />
+
+        <xacro:leg_control suffix="0"/>
+        <xacro:leg_control suffix="1"/>
+        <xacro:leg_control suffix="2"/>
+        <xacro:leg_control suffix="3"/>
+        <xacro:leg_control suffix="4"/>
+        <xacro:leg_control suffix="5"/>
+    </ros2_control>
+
+    <gazebo>
+        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+            <parameters>$(find crab_model/config/gazebo_control.yaml)</parameters>
+        </plugin>
+    </gazebo>
+
+</robot>
