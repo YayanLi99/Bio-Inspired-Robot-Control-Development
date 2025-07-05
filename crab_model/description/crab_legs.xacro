@@ -26,6 +26,9 @@
             </visual>
         </link>
 
+        <gazebo reference = "coxa_link_${suffix}">
+            <material>Gazebo/Red</material>
+        </gazebo>
 
         <!-- MERUS JOINT AND JOINT-->
         <joint name="merus_joint_${suffix}" type="revolute">
@@ -45,6 +48,10 @@
                 <material name="blue"/>
             </visual>
         </link>
+
+        <gazebo reference = "coxa_link_${suffix}">
+            <material>Gazebo/Blue</material>
+        </gazebo>        
 
 
         <!-- CARPUS JOINT AND LINK-->
@@ -68,6 +75,10 @@
             </visual>
         </link>
 
+        <gazebo reference = "coxa_link_${suffix}">
+            <material>Gazebo/Red</material>
+        </gazebo>
+
         <!-- MANUS JOINT AND LINK -->
         <joint name="manus_joint_${suffix}" type="revolute">
             <origin xyz="${manus_joint_Ox} ${manus_joint_Oy} ${manus_joint_Oz}" rpy="0.0 ${reflect*manus_joint_Ry} 0.0"/>
@@ -87,6 +98,11 @@
                 <material name="blue"/>
             </visual>
         </link>
+    
+
+        <gazebo reference = "coxa_link_${suffix}">
+            <material>Gazebo/Blue</material>
+        </gazebo>
 
         <!-- DACTYL JOINT AND LINK-->
 
@@ -106,6 +122,10 @@
                 <material name="red"/>
             </visual>
         </link>
+
+        <gazebo reference = "coxa_link_${suffix}">
+            <material>Gazebo/Red</material>
+        </gazebo>
 
     </xacro:macro>
 </robot>

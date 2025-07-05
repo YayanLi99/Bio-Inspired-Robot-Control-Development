@@ -4,10 +4,12 @@
   <xacro:arg name="use_ros2_control" default="false"/>
   <xacro:arg name="use_sim_time" default="false"/>
 
-  <xacro:include filename="crab_legs.xacro"/>
   <xacro:include filename="colors.xacro"/>
   <xacro:include filename="inertial_macros.xacro"/>
   <xacro:include filename="crab_properties.xacro"/>
+  <xacro:include filename="crab_legs.xacro"/>
+  <xacro:include filename="gazebo_control.xacro"/>
+
   <!--BASE LINK-->
   
   <link name = "base_link"></link>
