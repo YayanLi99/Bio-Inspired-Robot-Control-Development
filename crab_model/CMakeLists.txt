@@ -7,13 +7,30 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+#find_package(geometry_msgs REQUIRED)
+#find_package(rclcpp REQUIRED)
+#find_package(sensor_msgs REQUIRED)
+#find_package(tf2_ros REQUIRED)
+#find_package(rf2_geometry_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
+#add_executable(crab_model src/robot_state_publisher.cpp)
 
-install(DIRECTORY description launch
+#ament_target_dependencies(crab_model
+#  geometry_msgs
+#  rclcpp
+#  sensor_msgs
+#  tf2_ros
+#  rf2_geometry_msgs
+#)
+
+install(DIRECTORY description launch 
   DESTINATION share/${PROJECT_NAME}) 
+
+#install(TARGETS crab_model
+#  DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

@@ -24,6 +24,15 @@
                 </geometry>
                 <material name="red"/>
             </visual>
+            <collision>
+                <origin xyz="${coxa_link_Ox} ${coxa_link_Oy} ${coxa_link_Oz}" rpy=" 0.0  ${coxa_link_Ry} 0.0"/>
+                <geometry>
+                    <cylinder length="${coxa_link_length}" radius="${coxa_link_radius}"/>
+                </geometry>
+            </collision>
+            <xacro:inertial_cylinder mass="${coxa_link_mass}" length="${coxa_link_length}" radius="${coxa_link_radius}">
+                <origin xyz="${coxa_link_Ox} ${coxa_link_Oy} ${coxa_link_Oz}" rpy=" 0.0  ${coxa_link_Ry} 0.0"/>
+            </xacro:inertial_cylinder>
         </link>
 
         <gazebo reference = "coxa_link_${suffix}">
@@ -47,6 +56,15 @@
                 </geometry>
                 <material name="blue"/>
             </visual>
+            <collision>
+                <origin xyz="${merus_link_Ox} ${merus_link_Oy} ${merus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <cylinder length="${merus_link_length}" radius="${merus_link_radius}"/>
+                </geometry>
+            </collision>
+            <xacro:inertial_cylinder mass="${merus_link_mass}" length="${merus_link_length}" radius="${merus_link_radius}">
+                <origin xyz="${merus_link_Ox} ${merus_link_Oy} ${merus_link_Oz}" rpy="0.0 0.0 0.0"/>
+            </xacro:inertial_cylinder>
         </link>
 
         <gazebo reference = "coxa_link_${suffix}">
@@ -73,6 +91,16 @@
                 </geometry>
                 <material name="red"/>
             </visual>
+            <collision>
+                <origin xyz="${carpus_link_Ox} ${carpus_link_Oy} ${carpus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <cylinder length="${carpus_link_length}" radius = "${carpus_link_radius}"/>
+                </geometry>
+            </collision>
+            <xacro:inertial_cylinder mass="${carpus_link_mass}" length="${carpus_link_length}" radius="${carpus_link_radius}">
+                <origin xyz="${carpus_link_Ox} ${carpus_link_Oy} ${carpus_link_Oz}" rpy="0.0 0.0 0.0"/>
+            </xacro:inertial_cylinder>  
+    
         </link>
 
         <gazebo reference = "coxa_link_${suffix}">
@@ -97,6 +125,15 @@
                 </geometry>
                 <material name="blue"/>
             </visual>
+            <collision>
+                <origin xyz="0.0 0.0 ${manus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <cylinder length="${manus_link_length}" radius = "${manus_link_radius}"/>
+                </geometry>
+            </collision>
+            <xacro:inertial_cylinder mass="${manus_link_mass}" length="${manus_link_length}" radius="${manus_link_radius}">
+                <origin xyz="0.0 0.0 ${manus_link_Oz}" rpy="0.0 0.0 0.0"/>
+            </xacro:inertial_cylinder>
         </link>
     
 
@@ -121,6 +158,15 @@
                 </geometry>
                 <material name="red"/>
             </visual>
+            <collision>
+                <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <sphere radius="${dactyl_radius}"/>
+                </geometry>
+            </collision>
+            <xacro:inertial_sphere mass="${dactyl_mass}" radius="${dactyl_radius}">
+                <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
+            </xacro:inertial_sphere>
         </link>
 
         <gazebo reference = "coxa_link_${suffix}">
