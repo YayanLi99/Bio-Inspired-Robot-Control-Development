@@ -15,7 +15,6 @@
                 <param name="baud_rate">1000000</param>
             </hardware>
         </xacro:unless>
-        <joint name = "" />
 
         <xacro:leg_control suffix="0"/>
         <xacro:leg_control suffix="1"/>
@@ -25,6 +24,7 @@
         <xacro:leg_control suffix="5"/>
     </ros2_control>
 
+    <!-- When not using Gazebo we need to run ros2 run controller_manager ros2_control_node -->
     <gazebo>
         <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
             <parameters>$(find crab_model/config/gazebo_control.yaml)</parameters>
