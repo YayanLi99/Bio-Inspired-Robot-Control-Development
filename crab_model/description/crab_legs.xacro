@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <xacro:macro name="leg" params="suffix reflect Ox Oy Oz"> 
 
-        <!-- -->
+    <!-- FORE LEGS -->
+
+    <xacro:macro name="leg" params="suffix reflect Ox Oy Oz merus_link_length carpus_link_length manus_link_length fore_leg_Rz dactyl scale_x scale_y scale_z"> 
+
 
         <!-- COXA JOINT AND LINK-->
 
@@ -22,7 +24,7 @@
                 <geometry>
                     <cylinder length="${coxa_link_length}" radius="${coxa_link_radius}"/>
                 </geometry>
-                <material name="red"/>
+                <material name="blue"/>
             </visual>
             <collision>
                 <origin xyz="${coxa_link_Ox} ${coxa_link_Oy} ${coxa_link_Oz}" rpy=" 0.0  ${coxa_link_Ry} 0.0"/>
@@ -35,47 +37,40 @@
             </xacro:inertial_cylinder>
         </link>
 
-        <gazebo reference = "coxa_link_${suffix}">
-            <material>Gazebo/Red</material>
-        </gazebo>
 
         <!-- MERUS JOINT AND JOINT-->
         <joint name="merus_joint_${suffix}" type="revolute">
-            <origin xyz="${reflect*merus_joint_Ox} ${merus_joint_Oy} ${merus_joint_Oz}" rpy="0.0 ${reflect*merus_joint_Ry} 0.0"/>
+            <origin xyz="${merus_joint_Ox} ${reflect*merus_joint_Oy} ${merus_joint_Oz}" rpy="${reflect*merus_joint_Rx} 0.0 0.0"/>
             <parent link="coxa_link_${suffix}"/>
             <child link="merus_link_${suffix}"/>
             <limit effort="250.0" velocity="10.0" lower="-3.14" upper="3.14" />            
-            <axis xyz="0 1 0"/>
+            <axis xyz="1 0 0"/>
         </joint>
 
         <link name="merus_link_${suffix}">
             <visual>
-                <origin xyz="${merus_link_Ox} ${merus_link_Oy} ${merus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <origin xyz="${merus_link_Ox} ${merus_link_Oy} ${merus_link_length/2}" rpy="0.0 0.0 0.0"/>
                 <geometry>
                     <cylinder length="${merus_link_length}" radius="${merus_link_radius}"/>
                 </geometry>
                 <material name="blue"/>
             </visual>
             <collision>
-                <origin xyz="${merus_link_Ox} ${merus_link_Oy} ${merus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <origin xyz="${merus_link_Ox} ${merus_link_Oy} ${merus_link_length/2}" rpy="0.0 0.0 0.0"/>
                 <geometry>
                     <cylinder length="${merus_link_length}" radius="${merus_link_radius}"/>
                 </geometry>
             </collision>
             <xacro:inertial_cylinder mass="${merus_link_mass}" length="${merus_link_length}" radius="${merus_link_radius}">
-                <origin xyz="${merus_link_Ox} ${merus_link_Oy} ${merus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <origin xyz="${merus_link_Ox} ${merus_link_Oy} ${merus_link_length/2}" rpy="0.0 0.0 0.0"/>
             </xacro:inertial_cylinder>
-        </link>
-
-        <gazebo reference = "coxa_link_${suffix}">
-            <material>Gazebo/Blue</material>
-        </gazebo>        
+        </link>     
 
 
         <!-- CARPUS JOINT AND LINK-->
 
         <joint name="carpus_joint_${suffix}" type="revolute">
-            <origin xyz="${carpus_joint_Ox} ${carpus_joint_Oy} ${carpus_joint_Oz}" rpy="0.0 ${reflect*carpus_joint_Ry} 0.0"/>
+            <origin xyz="${carpus_joint_Ox} ${carpus_joint_Oy} ${merus_link_length+carpus_link_radius}" rpy="${reflect*carpus_joint_Rx} 0.0 ${reflect*fore_leg_Rz}"/>
             <parent link="merus_link_${suffix}"/>
             <child link="carpus_link_${suffix}"/>
             <limit effort="250.0" velocity="10.0" lower="-3.14" upper="3.14" />
@@ -85,31 +80,27 @@
 
         <link name="carpus_link_${suffix}">
             <visual>
-                <origin xyz="${carpus_link_Ox} ${carpus_link_Oy} ${carpus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <origin xyz="${carpus_link_Ox} ${carpus_link_Oy} ${carpus_link_length/2}" rpy="0.0 0.0 0.0"/>
                 <geometry>
                     <cylinder length="${carpus_link_length}" radius = "${carpus_link_radius}"/>
                 </geometry>
                 <material name="red"/>
             </visual>
             <collision>
-                <origin xyz="${carpus_link_Ox} ${carpus_link_Oy} ${carpus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <origin xyz="${carpus_link_Ox} ${carpus_link_Oy} ${carpus_link_length/2}" rpy="0.0 0.0 0.0"/>
                 <geometry>
                     <cylinder length="${carpus_link_length}" radius = "${carpus_link_radius}"/>
                 </geometry>
             </collision>
             <xacro:inertial_cylinder mass="${carpus_link_mass}" length="${carpus_link_length}" radius="${carpus_link_radius}">
-                <origin xyz="${carpus_link_Ox} ${carpus_link_Oy} ${carpus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <origin xyz="${carpus_link_Ox} ${carpus_link_Oy} ${carpus_link_length/2}" rpy="0.0 0.0 0.0"/>
             </xacro:inertial_cylinder>  
-    
         </link>
 
-        <gazebo reference = "coxa_link_${suffix}">
-            <material>Gazebo/Red</material>
-        </gazebo>
 
         <!-- MANUS JOINT AND LINK -->
         <joint name="manus_joint_${suffix}" type="revolute">
-            <origin xyz="${manus_joint_Ox} ${manus_joint_Oy} ${manus_joint_Oz}" rpy="0.0 ${reflect*manus_joint_Ry} 0.0"/>
+            <origin xyz="${manus_joint_Ox} ${manus_joint_Oy} ${carpus_link_length}" rpy="${reflect*manus_joint_Rx} 0.0 0.0"/>
             <parent link="carpus_link_${suffix}"/>
             <child link="manus_link_${suffix}"/>
             <limit effort="250.0" velocity="10.0" lower="-3.14" upper="3.14" />
@@ -119,59 +110,102 @@
 
         <link name="manus_link_${suffix}">
             <visual>
-                <origin xyz="0.0 0.0 ${manus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <origin xyz="0.0 0.0 ${manus_link_length/2}" rpy="0.0 0.0 0.0"/>
                 <geometry>
                     <cylinder length="${manus_link_length}" radius = "${manus_link_radius}"/>
                 </geometry>
                 <material name="blue"/>
             </visual>
             <collision>
-                <origin xyz="0.0 0.0 ${manus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <origin xyz="0.0 0.0 ${manus_link_length/2}" rpy="0.0 0.0 0.0"/>
                 <geometry>
                     <cylinder length="${manus_link_length}" radius = "${manus_link_radius}"/>
                 </geometry>
             </collision>
             <xacro:inertial_cylinder mass="${manus_link_mass}" length="${manus_link_length}" radius="${manus_link_radius}">
-                <origin xyz="0.0 0.0 ${manus_link_Oz}" rpy="0.0 0.0 0.0"/>
+                <origin xyz="0.0 0.0 ${manus_link_length/2}" rpy="0.0 0.0 0.0"/>
             </xacro:inertial_cylinder>
         </link>
-    
 
-        <gazebo reference = "coxa_link_${suffix}">
-            <material>Gazebo/Blue</material>
-        </gazebo>
+
 
         <!-- DACTYL JOINT AND LINK-->
 
         <joint name="dactyl_joint_${suffix}" type="fixed">
-            <origin xyz="0.0 0.0 -${manus_link_length}" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.0 ${manus_link_length}" rpy="0.0 0.0 0.0"/>
             <parent link="manus_link_${suffix}"/>
             <child link="dactyl_link_${suffix}"/>
             <dynamics damping="0.7"/>
         </joint>
 
-        <link name="dactyl_link_${suffix}">
-            <visual>
-                <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
-                <geometry>
-                    <sphere radius="${dactyl_radius}"/>
-                </geometry>
-                <material name="red"/>
-            </visual>
-            <collision>
-                <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
-                <geometry>
-                    <sphere radius="${dactyl_radius}"/>
-                </geometry>
-            </collision>
-            <xacro:inertial_sphere mass="${dactyl_mass}" radius="${dactyl_radius}">
-                <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
-            </xacro:inertial_sphere>
-        </link>
+
+        <xacro:if value="${dactyl == 1}">
+            <link name="dactyl_link_${suffix}">
+                <visual>
+                    <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
+                    <geometry>
+                        <mesh filename="package://crab_model/meshes/dactyl.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
+                    </geometry>
+                    <material name="red"/>
+                </visual>
+                <collision>
+                    <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
+                    <geometry>
+                        <mesh filename="package://crab_model/meshes/dactyl.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
+                    </geometry>
+                </collision>
+                <xacro:inertial_sphere mass="${dactyl_mass}" radius="${dactyl_radius}">
+                    <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
+                </xacro:inertial_sphere>
+            </link>
+        </xacro:if>
+
+        <xacro:unless value="${dactyl == 1}">
+            <link name="dactyl_link_${suffix}">
+                <visual>
+                    <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
+                    <geometry>
+                        <mesh filename="package://crab_model/meshes/crab_claw.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
+                    </geometry>
+                    <material name="red"/>
+                </visual>
+                <collision>
+                    <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
+                    <geometry>
+                        <mesh filename="package://crab_model/meshes/crab_claw.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
+                    </geometry>
+                </collision>
+                <xacro:inertial_sphere mass="${dactyl_mass}" radius="${dactyl_radius}">
+                    <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
+                </xacro:inertial_sphere>
+            </link>        
+        </xacro:unless>
+
+
+
+
+
+        <!-- Gazebo material for all links -->
 
         <gazebo reference = "coxa_link_${suffix}">
-            <material>Gazebo/Red</material>
+            <material>Gazebo/blue</material>
+        </gazebo>
+
+
+        <gazebo reference = "merus_link_${suffix}">
+            <material>Gazebo/Blue</material>
+        </gazebo>        
+
+        <gazebo reference = "manus_link_${suffix}">
+            <material>Gazebo/Blue</material>
+        </gazebo>
+
+        <gazebo reference = "dactyl_link_${suffix}">
+            <material>Gazebo/Blue</material>
         </gazebo>
 
     </xacro:macro>
+
+
+
 </robot>

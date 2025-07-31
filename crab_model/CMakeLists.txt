@@ -26,7 +26,7 @@ find_package(ament_cmake REQUIRED)
 #  rf2_geometry_msgs
 #)
 
-install(DIRECTORY description launch 
+install(DIRECTORY description launch meshes
   DESTINATION share/${PROJECT_NAME}) 
 
 #install(TARGETS crab_model
