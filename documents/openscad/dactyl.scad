@@ -1,14 +1,13 @@
-// 基础参数
-height = 10;           // 总高度
-top_radius = 10;       // 顶面外切圆半径
-$fn = 100;             // 平滑度
+height = 10;           
+top_radius = 10;       
+$fn = 100;             // smoothness
 
-// 创建角锥体
+// Create a pyramid
 module pyramid_prism() {
-    // 定义顶点
+    // define vertex
     points = [
-        // 底点（原点）
-        [0, 0, height],         // 0: 底面点
+        // origin
+        [0, 0, height],       
         
         // 顶面的四个顶点
         [-top_radius, -top_radius, 0], // 1: 左后
