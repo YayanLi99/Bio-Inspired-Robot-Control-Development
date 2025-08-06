@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+    <gazebo reference="body_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo reference="eyes_left">
+        <material>Gazebo/Black</material>
+    </gazebo>   
+
+    <gazebo reference="eyes_right">
+        <material>Gazebo/Black</material>  
+    </gazebo>
+
+
+    <gazebo reference = "coxa_link_${suffix}">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+
+    <gazebo reference = "merus_link_${suffix}">
+        <material>Gazebo/Blue</material>
+    </gazebo>        
+
+    <gazebo reference = "carpus_link_${suffix}">
+        <material>Gazebo/Blue</material>
+    </gazebo> 
+
+    <gazebo reference = "manus_link_${suffix}">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference = "dactyl_link_${suffix}">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+
+
+    <!-- ros_control plugin -->
+    <gazebo>
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <parameters>$(find crab_model)/config/gaz_ros2_control.yaml</parameters>
+      </plugin>
+    </gazebo>
+
+</robot>

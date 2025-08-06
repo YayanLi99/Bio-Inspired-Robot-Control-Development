@@ -8,6 +8,11 @@
   <xacro:include filename="inertial_macros.xacro"/>
   <xacro:include filename="crab_properties.xacro"/>
   <xacro:include filename="crab_legs.xacro"/>
+  <xacro:include filename="gazebo_control.xacro"/>
+  <xacro:include filename="ros2_control_crab.xacro"/>
+  <xacro:include filename="ros2_control_leg.xacro"/>
+  
+  
   
   <!--BASE LINK-->
   
@@ -109,17 +114,6 @@
   <xacro:leg suffix="R3" reflect="-1" Ox="-0.14" Oy="-0.09" Oz="0.0" merus_link_length="0.16" carpus_link_length="0.07" manus_link_length ="0.10" fore_leg_Rz="0.0" dactyl="1" scale_x="0.001" scale_y="0.001" scale_z="0.006"/>
   <xacro:leg suffix="R4" reflect="-1" Ox="-0.18" Oy="-0.075" Oz="0.0" merus_link_length="0.13" carpus_link_length="0.058" manus_link_length ="0.09" fore_leg_Rz="0.0" dactyl="1" scale_x="0.001" scale_y="0.001" scale_z="0.005"/>  
 
-  <gazebo reference="body_link">
-    <material>Gazebo/Red</material>
-  </gazebo>
-
-  <gazebo reference="eyes_left">
-    <material>Gazebo/Black</material>
-  </gazebo>   
-
-  <gazebo reference="eyes_right">
-    <material>Gazebo/Black</material>  
-  </gazebo>
   
 
 </robot>

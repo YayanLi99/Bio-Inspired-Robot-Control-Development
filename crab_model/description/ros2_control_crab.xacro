@@ -7,6 +7,7 @@
                 <plugin>gazebo_ros2_control/GazeboSystem</plugin>
             </hardware>
         </xacro:if>
+        <!-- If not using Gazebo, use Dynamixel hardware plugin -->
         <xacro:unless value="${arg use_sim_time}">
             <hardware>
                 <plugin>dynamixel_hardware/DynamixelHardware</plugin>
@@ -16,12 +17,16 @@
             </hardware>
         </xacro:unless>
 
-        <xacro:leg_control suffix="0"/>
-        <xacro:leg_control suffix="1"/>
-        <xacro:leg_control suffix="2"/>
-        <xacro:leg_control suffix="3"/>
-        <xacro:leg_control suffix="4"/>
-        <xacro:leg_control suffix="5"/>
+        <xacro:leg_control suffix="F1"/>
+        <xacro:leg_control suffix="F2"/>
+        <xacro:leg_control suffix="L1"/>
+        <xacro:leg_control suffix="L2"/>
+        <xacro:leg_control suffix="L3"/>
+        <xacro:leg_control suffix="L4"/>
+        <xacro:leg_control suffix="R1"/>
+        <xacro:leg_control suffix="R2"/>
+        <xacro:leg_control suffix="R3"/>
+        <xacro:leg_control suffix="R4"/>
     </ros2_control>
 
     <!-- When not using Gazebo we need to run ros2 run controller_manager ros2_control_node -->
