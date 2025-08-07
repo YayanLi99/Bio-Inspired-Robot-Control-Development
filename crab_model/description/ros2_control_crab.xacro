@@ -4,6 +4,7 @@
     <ros2_control name="GazeboSystem" type = "system">
         <xacro:if value="${arg use_sim_time}">
             <hardware>
+                <!--Receive msg from controller-->
                 <plugin>gazebo_ros2_control/GazeboSystem</plugin>
             </hardware>
         </xacro:if>
@@ -29,11 +30,5 @@
         <xacro:leg_control suffix="R4"/>
     </ros2_control>
 
-    <!-- When not using Gazebo we need to run ros2 run controller_manager ros2_control_node -->
-    <gazebo>
-        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-            <parameters>$(find crab_model/config/gazebo_control.yaml)</parameters>
-        </plugin>
-    </gazebo>
 
 </robot>

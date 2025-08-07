@@ -1,7 +1,7 @@
 controller_manager:
   ros__parameters:
     update_rate: 30
-    #use_sim_time: true
+    use_sim_time: true
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -25,96 +25,226 @@ controller_manager:
 forward_position_controller:
   ros__parameters:
     joints:
-      - coxa_joint_0
-      - femur_joint_0
-      - tibia_joint_0
-      - coxa_joint_1
-      - femur_joint_1
-      - tibia_joint_1
-      - coxa_joint_2
-      - femur_joint_2
-      - tibia_joint_2
-      - coxa_joint_3
-      - femur_joint_3
-      - tibia_joint_3
-      - coxa_joint_4
-      - femur_joint_4
-      - tibia_joint_4
-      - coxa_joint_5
-      - femur_joint_5
-      - tibia_joint_5
+      - coxa_joint_F1
+      - merus_joint_F1
+      - carpus_joint_F1
+      - manus_joint_F1
+      - dactyl_joint_F1
+      - coxa_joint_F2
+      - merus_joint_F2
+      - carpus_joint_F2
+      - manus_joint_F2
+      - dactyl_joint_F2
+      - coxa_joint_L1
+      - merus_joint_L1
+      - carpus_joint_L1
+      - manus_joint_L1
+      - dactyl_joint_L1
+      - coxa_joint_L2
+      - merus_joint_L2
+      - carpus_joint_L2
+      - manus_joint_L2
+      - dactyl_joint_L2
+      - coxa_joint_L3
+      - merus_joint_L3
+      - carpus_joint_L3
+      - manus_joint_L3
+      - dactyl_joint_L3
+      - coxa_joint_L4
+      - merus_joint_L4
+      - carpus_joint_L4
+      - manus_joint_L4
+      - dactyl_joint_L4
+      - coxa_joint_R1
+      - merus_joint_R1
+      - carpus_joint_R1
+      - manus_joint_R1
+      - dactyl_joint_R1
+      - coxa_joint_R2
+      - merus_joint_R2
+      - carpus_joint_R2
+      - manus_joint_R2
+      - dactyl_joint_R2
+      - coxa_joint_R3
+      - merus_joint_R3
+      - carpus_joint_R3
+      - manus_joint_R3
+      - dactyl_joint_R3
+      - coxa_joint_R4
+      - merus_joint_R4
+      - carpus_joint_R4
+      - manus_joint_R4
+      - dactyl_joint_R4
 
     interface_name: position
 
 forward_velocity_controller:
   ros__parameters:
     joints:
-      - coxa_joint_0
-      - femur_joint_0
-      - tibia_joint_0
-      - coxa_joint_1
-      - femur_joint_1
-      - tibia_joint_1
-      - coxa_joint_2
-      - femur_joint_2
-      - tibia_joint_2
-      - coxa_joint_3
-      - femur_joint_3
-      - tibia_joint_3
-      - coxa_joint_4
-      - femur_joint_4
-      - tibia_joint_4
-      - coxa_joint_5
-      - femur_joint_5
-      - tibia_joint_5
+      - coxa_joint_F1
+      - merus_joint_F1
+      - carpus_joint_F1
+      - manus_joint_F1
+      - dactyl_joint_F1
+      - coxa_joint_F2
+      - merus_joint_F2
+      - carpus_joint_F2
+      - manus_joint_F2
+      - dactyl_joint_F2
+      - coxa_joint_L1
+      - merus_joint_L1
+      - carpus_joint_L1
+      - manus_joint_L1
+      - dactyl_joint_L1
+      - coxa_joint_L2
+      - merus_joint_L2
+      - carpus_joint_L2
+      - manus_joint_L2
+      - dactyl_joint_L2
+      - coxa_joint_L3
+      - merus_joint_L3
+      - carpus_joint_L3
+      - manus_joint_L3
+      - dactyl_joint_L3
+      - coxa_joint_L4
+      - merus_joint_L4
+      - carpus_joint_L4
+      - manus_joint_L4
+      - dactyl_joint_L4
+      - coxa_joint_R1
+      - merus_joint_R1
+      - carpus_joint_R1
+      - manus_joint_R1
+      - dactyl_joint_R1
+      - coxa_joint_R2
+      - merus_joint_R2
+      - carpus_joint_R2
+      - manus_joint_R2
+      - dactyl_joint_R2
+      - coxa_joint_R3
+      - merus_joint_R3
+      - carpus_joint_R3
+      - manus_joint_R3
+      - dactyl_joint_R3
+      - coxa_joint_R4
+      - merus_joint_R4
+      - carpus_joint_R4
+      - manus_joint_R4
+      - dactyl_joint_R4
+
 
     interface_name: velocity
 
 forward_effort_controller:
   ros__parameters:
     joints:
-      - coxa_joint_0
-      - femur_joint_0
-      - tibia_joint_0
-      - coxa_joint_1
-      - femur_joint_1
-      - tibia_joint_1
-      - coxa_joint_2
-      - femur_joint_2
-      - tibia_joint_2
-      - coxa_joint_3
-      - femur_joint_3
-      - tibia_joint_3
-      - coxa_joint_4
-      - femur_joint_4
-      - tibia_joint_4
-      - coxa_joint_5
-      - femur_joint_5
-      - tibia_joint_5
+      - coxa_joint_F1
+      - merus_joint_F1
+      - carpus_joint_F1
+      - manus_joint_F1
+      - dactyl_joint_F1
+      - coxa_joint_F2
+      - merus_joint_F2
+      - carpus_joint_F2
+      - manus_joint_F2
+      - dactyl_joint_F2
+      - coxa_joint_L1
+      - merus_joint_L1
+      - carpus_joint_L1
+      - manus_joint_L1
+      - dactyl_joint_L1
+      - coxa_joint_L2
+      - merus_joint_L2
+      - carpus_joint_L2
+      - manus_joint_L2
+      - dactyl_joint_L2
+      - coxa_joint_L3
+      - merus_joint_L3
+      - carpus_joint_L3
+      - manus_joint_L3
+      - dactyl_joint_L3
+      - coxa_joint_L4
+      - merus_joint_L4
+      - carpus_joint_L4
+      - manus_joint_L4
+      - dactyl_joint_L4
+      - coxa_joint_R1
+      - merus_joint_R1
+      - carpus_joint_R1
+      - manus_joint_R1
+      - dactyl_joint_R1
+      - coxa_joint_R2
+      - merus_joint_R2
+      - carpus_joint_R2
+      - manus_joint_R2
+      - dactyl_joint_R2
+      - coxa_joint_R3
+      - merus_joint_R3
+      - carpus_joint_R3
+      - manus_joint_R3
+      - dactyl_joint_R3
+      - coxa_joint_R4
+      - merus_joint_R4
+      - carpus_joint_R4
+      - manus_joint_R4
+      - dactyl_joint_R4
+
 
     interface_name: effort     
 
 joint_trajectory_position_controller:
   ros__parameters:
     joints:
-      - coxa_joint_0
-      - femur_joint_0
-      - tibia_joint_0
-      - coxa_joint_1
-      - femur_joint_1
-      - tibia_joint_1
-      - coxa_joint_2
-      - femur_joint_2
-      - tibia_joint_2
-      - coxa_joint_3
-      - femur_joint_3
-      - tibia_joint_3
-      - coxa_joint_4
-      - femur_joint_4
-      - tibia_joint_4
-      - coxa_joint_5
-      - femur_joint_5
-      - tibia_joint_5
+      - coxa_joint_F1
+      - merus_joint_F1
+      - carpus_joint_F1
+      - manus_joint_F1
+      - dactyl_joint_F1
+      - coxa_joint_F2
+      - merus_joint_F2
+      - carpus_joint_F2
+      - manus_joint_F2
+      - dactyl_joint_F2
+      - coxa_joint_L1
+      - merus_joint_L1
+      - carpus_joint_L1
+      - manus_joint_L1
+      - dactyl_joint_L1
+      - coxa_joint_L2
+      - merus_joint_L2
+      - carpus_joint_L2
+      - manus_joint_L2
+      - dactyl_joint_L2
+      - coxa_joint_L3
+      - merus_joint_L3
+      - carpus_joint_L3
+      - manus_joint_L3
+      - dactyl_joint_L3
+      - coxa_joint_L4
+      - merus_joint_L4
+      - carpus_joint_L4
+      - manus_joint_L4
+      - dactyl_joint_L4
+      - coxa_joint_R1
+      - merus_joint_R1
+      - carpus_joint_R1
+      - manus_joint_R1
+      - dactyl_joint_R1
+      - coxa_joint_R2
+      - merus_joint_R2
+      - carpus_joint_R2
+      - manus_joint_R2
+      - dactyl_joint_R2
+      - coxa_joint_R3
+      - merus_joint_R3
+      - carpus_joint_R3
+      - manus_joint_R3
+      - dactyl_joint_R3
+      - coxa_joint_R4
+      - merus_joint_R4
+      - carpus_joint_R4
+      - manus_joint_R4
+      - dactyl_joint_R4
 
     command_interfaces:
       - position
@@ -127,24 +257,57 @@ joint_trajectory_position_controller:
 pid_position_controller:
   ros__parameters:
     joints:
-      - coxa_joint_0
-      - femur_joint_0
-      - tibia_joint_0
-      - coxa_joint_1
-      - femur_joint_1
-      - tibia_joint_1
-      - coxa_joint_2
-      - femur_joint_2
-      - tibia_joint_2
-      - coxa_joint_3
-      - femur_joint_3
-      - tibia_joint_3
-      - coxa_joint_4
-      - femur_joint_4
-      - tibia_joint_4
-      - coxa_joint_5
-      - femur_joint_5
-      - tibia_joint_5
+      - coxa_joint_F1
+      - merus_joint_F1
+      - carpus_joint_F1
+      - manus_joint_F1
+      - dactyl_joint_F1
+      - coxa_joint_F2
+      - merus_joint_F2
+      - carpus_joint_F2
+      - manus_joint_F2
+      - dactyl_joint_F2
+      - coxa_joint_L1
+      - merus_joint_L1
+      - carpus_joint_L1
+      - manus_joint_L1
+      - dactyl_joint_L1
+      - coxa_joint_L2
+      - merus_joint_L2
+      - carpus_joint_L2
+      - manus_joint_L2
+      - dactyl_joint_L2
+      - coxa_joint_L3
+      - merus_joint_L3
+      - carpus_joint_L3
+      - manus_joint_L3
+      - dactyl_joint_L3
+      - coxa_joint_L4
+      - merus_joint_L4
+      - carpus_joint_L4
+      - manus_joint_L4
+      - dactyl_joint_L4
+      - coxa_joint_R1
+      - merus_joint_R1
+      - carpus_joint_R1
+      - manus_joint_R1
+      - dactyl_joint_R1
+      - coxa_joint_R2
+      - merus_joint_R2
+      - carpus_joint_R2
+      - manus_joint_R2
+      - dactyl_joint_R2
+      - coxa_joint_R3
+      - merus_joint_R3
+      - carpus_joint_R3
+      - manus_joint_R3
+      - dactyl_joint_R3
+      - coxa_joint_R4
+      - merus_joint_R4
+      - carpus_joint_R4
+      - manus_joint_R4
+      - dactyl_joint_R4
+
 
     action_monitor_rate: 20.0 # Defaults to 20
 
