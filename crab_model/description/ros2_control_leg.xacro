@@ -4,7 +4,7 @@
     <xacro:macro name="leg_control" params="suffix"> 
         <joint name="coxa_joint_${suffix}">
 
-            <param name="id">${suffix*3 + 0}</param>
+            <param name="id">${suffix}</param>
             <param name="pos_kp">5000</param>
             <param name="pos_ki">1</param>
             <param name="pos_kd">3</param>
@@ -26,6 +26,7 @@
             </xacro:if>
 
             <!--state_interface name="position"/-->
+            
             <!--SET INITIAL POSITION, note that this will not reset when gazebo world is restarted-->
             <state_interface name="position">
                 <xacro:if value="${suffix==0}"> 
@@ -52,7 +53,7 @@
             <state_interface name="effort"/>
         </joint>
 
-        <joint name="femur_joint_${suffix}">
+        <joint name="merus_joint_${suffix}">
 
             <param name="id">${suffix*3 + 1}</param>
             <param name="pos_kp">5000</param>
@@ -84,7 +85,40 @@
             <state_interface name="effort"/>
         </joint>
 
-        <joint name="tibia_joint_${suffix}">
+        <joint name="carpus_joint_${suffix}">
+
+            <param name="id">${suffix}</param>
+            <param name="pos_kp">5000</param>
+            <param name="pos_ki">1</param>
+            <param name="pos_kd">3</param>
+            <param name="pos_max_integral_error">10000</param>
+
+            <command_interface name="position_pid">
+            <!--command_interface name="position"-->
+                <param name="min">-3.14</param>
+                <param name="max">3.14</param>
+            </command_interface>
+
+            <command_interface name="velocity">
+                <!--param name="min">-1.0</param>
+                <param name="max">1.0</param-->
+            </command_interface>
+
+            <xacro:if value="$(arg sim_mode)">
+                <command_interface name="effort"/>
+            </xacro:if>  
+
+            <!--state_interface name="position"/-->
+            <state_interface name="position">
+                <param name="initial_value">2.3</param>
+            </state_interface>
+
+            <state_interface name="velocity"/>
+            <state_interface name="effort"/>
+        </joint>
+
+
+        <joint name="manus_joint_${suffix}">
 
             <param name="id">${suffix*3 + 2}</param>
             <param name="pos_kp">5000</param>
@@ -115,6 +149,38 @@
             <state_interface name="velocity"/>
             <state_interface name="effort"/>
         </joint>
-        
+
+        <joint name="dactyl_joint_${suffix}">
+
+            <param name="id">${suffix*3 + 2}</param>
+            <param name="pos_kp">5000</param>
+            <param name="pos_ki">1</param>
+            <param name="pos_kd">3</param>
+            <param name="pos_max_integral_error">10000</param>
+
+            <command_interface name="position_pid">
+            <!--command_interface name="position"-->
+                <param name="min">-3.14</param>
+                <param name="max">3.14</param>
+            </command_interface>
+
+            <command_interface name="velocity">
+                <!--param name="min">-1.0</param>
+                <param name="max">1.0</param-->
+            </command_interface>
+
+            <xacro:if value="$(arg sim_mode)">
+                <command_interface name="effort"/>
+            </xacro:if>  
+
+            <!--state_interface name="position"/-->
+            <state_interface name="position">
+                <param name="initial_value">2.3</param>
+            </state_interface>
+
+            <state_interface name="velocity"/>
+            <state_interface name="effort"/>
+        </joint>
+
     </xacro:macro>
 </robot>

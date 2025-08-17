@@ -1,13 +1,12 @@
 import os
-
 from ament_index_python.packages import get_package_share_directory
-
-
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, RegisterEventHandler
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.event_handlers import OnProcessExit
 
 from launch_ros.actions import Node
+import xacro
 
 
 
@@ -45,43 +44,19 @@ def generate_launch_description():
         output='screen', 
     )
 
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        output="screen"
+    )
+
     forward_position_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["forward_position_controller", "--controller-manager", "/controller_manager"],
         output="screen"
     )
-
-    forward_velocity_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["forward_velocity_controller", "--controller-manager", "/controller_manager", "--inactive"],
-        output="screen"
-    )
-
-    forward_effort_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["forward_effort_controller", "--controller-manager", "/controller_manager", "--inactive"],
-        output="screen"
-    )
-
-    joint_trajectory_position_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_trajectory_position_controller", "--controller-manager", "/controller_manager", "--inactive"],
-        output="screen"
-    )
-
-
-    delayed_rviz_node = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=joint_state_broadcaster_spawner,
-            on_exit=[rviz_node],
-        )
-    )    
-
-
 
 
 
@@ -90,10 +65,7 @@ def generate_launch_description():
         rsp,
         gazebo,
         spawn_entity,
-        controller_manager
+        controller_manager,
         forward_position_controller_spawner,
-        forward_velocity_controller_spawner,
-        forward_effort_controller_spawner,
-        joint_trajectory_position_controller_spawner,
-        delayed_rviz_node,
+        joint_state_broadcaster_spawner 
     ])

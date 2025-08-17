@@ -8,9 +8,8 @@
   <xacro:include filename="inertial_macros.xacro"/>
   <xacro:include filename="crab_properties.xacro"/>
   <xacro:include filename="crab_legs.xacro"/>
-  <xacro:include filename="gazebo_control.xacro"/>
-  <xacro:include filename="ros2_control_crab.xacro"/>
   <xacro:include filename="ros2_control_leg.xacro"/>
+  <xacro:include filename="ros2_control_crab.xacro"/>
   
   
   
@@ -33,14 +32,17 @@
         <!-- this mesh is constructed by two Ellipsoids with radius 10cm and radius 7cm seperately -->
         <!-- Connect the two origins of ELlipsoids-->
         <!-- The center of body locates at the intersection of the large Ellipsoid and the staight line-->
-        <mesh filename="package://crab_model/meshes/crab_body.stl" scale="0.01 0.01 0.01"/>
+        <box size="0.27 0.20 0.1"/>
+
+        <!-- mesh filename="package://crab_model/meshes/crab_body.stl" scale="0.01 0.01 0.01"/ -->
       </geometry>
       <material name="red"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://crab_model/meshes/crab_body.stl" scale="0.01 0.01 0.01"/>
+        <box size="0.27 0.20 0.1"/>
+        <!-- mesh filename="package://crab_model/meshes/crab_body.stl" scale="0.01 0.01 0.01"/ -->
       </geometry>
     </collision>
     <xacro:inertial_box mass="1.0" x="0.1" y="0.1" z="0.10">
@@ -99,6 +101,18 @@
       <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
     </xacro:inertial_box>
   </link>
+
+  <gazebo reference="body_link">
+      <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="eyes_left">
+      <material>Gazebo/Black</material>
+  </gazebo>   
+
+  <gazebo reference="eyes_right">
+      <material>Gazebo/Black</material>  
+  </gazebo>
 
 
   <!-- CRAB LEGS-->

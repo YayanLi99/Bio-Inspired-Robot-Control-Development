@@ -182,6 +182,27 @@
         </xacro:unless>
 
 
+        <gazebo reference = "coxa_link_${suffix}">
+            <material>Gazebo/Blue</material>
+        </gazebo>
+
+
+        <gazebo reference = "merus_link_${suffix}">
+            <material>Gazebo/Blue</material>
+        </gazebo>        
+
+        <gazebo reference = "carpus_link_${suffix}">
+            <material>Gazebo/Blue</material>
+        </gazebo> 
+
+        <gazebo reference = "manus_link_${suffix}">
+            <material>Gazebo/Blue</material>
+        </gazebo>
+
+        <gazebo reference = "dactyl_link_${suffix}">
+            <material>Gazebo/Blue</material>
+        </gazebo>
+
     </xacro:macro>
 
 
