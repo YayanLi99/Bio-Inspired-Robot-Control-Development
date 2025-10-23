@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="spider_crab">
+
+  <xacro:arg name="use_ros2_control" default="false"/>
+  <xacro:arg name="use_sim_time" default="true"/>
+
+  <xacro:include filename="colors.xacro"/>
+  <xacro:include filename="inertial_macros.xacro"/>
+  <xacro:include filename="crab_properties.xacro"/>
+  <xacro:include filename="crab_legs.xacro"/>  
+  <xacro:include filename="ros2_control_leg.xacro"/>
+  <xacro:include filename="gazebo_ros2_control.xacro"/>
+  
+  
+  <!--BASE LINK-->
+  
+  <link name = "base_link"></link>
+
+  <!-- BODY JOINT AND LINK-->
+
+  <joint name="body_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="body_link"/>
+    <origin xyz="0 0 ${body_link_height}" rpy="0 0 0"/>
+  </joint>  
+
+  <link name ="body_link">
+    <visual>
+      <origin xyz="0.035 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.27 0.20 0.05"/>
+        <!-- mesh filename="package://crab_model/meshes/crab_body.stl" scale="0.01 0.01 0.01"/ -->
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.27 0.20 0.05"/>
+        <!-- mesh filename="package://crab_model/meshes/crab_body.stl" scale="0.01 0.01 0.01"/ -->
+      </geometry>
+    </collision>
+    <xacro:inertial_box mass="1.0" x="0.1" y="0.1" z="0.10">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:inertial_box> 
+  </link>
+
+  <!-- EYES JOINT AND LINK-->
+
+  <joint name ="eyes_left_joint" type="fixed">
+    <parent link="body_link"/>
+    <child link="eyes_left_link"/>
+    <origin xyz="0.17 0.035 0.0" rpy="0.0 1.57 0.16"/>
+  </joint>
+
+  <link name="eyes_left_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.015" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <cylinder length="0.03" radius = "0.005"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.015" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <cylinder length="0.03" radius = "0.005"/>
+      </geometry>
+    </collision>
+    <xacro:inertial_box mass="1e-3" x="1e-2" y="1e-2" z="1e-2">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </xacro:inertial_box>
+  </link> 
+
+  <joint name ="eyes_right_joint" type="fixed">
+    <parent link="body_link"/>
+    <child link="eyes_right_link"/>
+    <origin xyz="0.17 -0.035 0.0" rpy="0.0 1.57 -0.16"/>
+  </joint>    
+  
+  <link name="eyes_right_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.015" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <cylinder length="0.03" radius = "0.005"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.015" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <cylinder length="0.03" radius = "0.005"/>
+      </geometry>
+    </collision>
+    <xacro:inertial_box mass="1e-3" x="1e-2" y="1e-2" z="1e-2">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </xacro:inertial_box>
+  </link>
+
+
+  <!-- CRAB LEGS-->
+  <!-- reflect=1 means left side-->
+  <xacro:leg suffix="F1" reflect="1" Ox="0.1" Oy="0.115" Oz="0.0" merus_link_length="0.08" carpus_link_length="0.04" manus_link_length ="0.06" fore_leg_Rz="-1.22" dactyl="-1" scale_x="0.001" scale_y="0.001" scale_z="0.0042"/>
+  <xacro:leg suffix="F2" reflect="-1" Ox="0.1" Oy="-0.115" Oz="0.0" merus_link_length="0.08" carpus_link_length="0.04" manus_link_length ="0.06" fore_leg_Rz="-1.22" dactyl="-1" scale_x="0.001" scale_y="0.001" scale_z="0.0042"/>
+  <xacro:leg suffix="L1" reflect="1" Ox="0.05" Oy="0.115" Oz="0.0" merus_link_length="0.20" carpus_link_length="0.08" manus_link_length ="0.14" fore_leg_Rz="0.0" dactyl="1" scale_x="0.001" scale_y="0.001" scale_z="0.007"/>
+  <xacro:leg suffix="L2" reflect="1" Ox="0.0" Oy="0.115" Oz="0.0" merus_link_length="0.19" carpus_link_length="0.07" manus_link_length ="0.12" fore_leg_Rz="0.0" dactyl="1" scale_x="0.001" scale_y="0.001" scale_z="0.007"/>
+  <xacro:leg suffix="L3" reflect="1" Ox="-0.05" Oy="0.115" Oz="0.0" merus_link_length="0.16" carpus_link_length="0.07" manus_link_length ="0.10" fore_leg_Rz="0.0" dactyl="1" scale_x="0.001" scale_y="0.001" scale_z="0.006"/>
+  <xacro:leg suffix="L4" reflect="1" Ox="-0.1" Oy="0.115" Oz="0.0" merus_link_length="0.13" carpus_link_length="0.058" manus_link_length ="0.09" fore_leg_Rz="0.0" dactyl="1" scale_x="0.001" scale_y="0.001" scale_z="0.005"/>
+  <xacro:leg suffix="R1" reflect="-1" Ox="0.05" Oy="-0.115" Oz="0.0" merus_link_length="0.20" carpus_link_length="0.08" manus_link_length ="0.14" fore_leg_Rz="0.0" dactyl="1" scale_x="0.001" scale_y="0.001" scale_z="0.007"/>
+  <xacro:leg suffix="R2" reflect="-1" Ox="0.0" Oy="-0.115" Oz="0.0" merus_link_length="0.19" carpus_link_length="0.07" manus_link_length ="0.12" fore_leg_Rz="0.0" dactyl="1" scale_x="0.001" scale_y="0.001" scale_z="0.007"/>
+  <xacro:leg suffix="R3" reflect="-1" Ox="-0.05" Oy="-0.115" Oz="0.0" merus_link_length="0.16" carpus_link_length="0.07" manus_link_length ="0.10" fore_leg_Rz="0.0" dactyl="1" scale_x="0.001" scale_y="0.001" scale_z="0.006"/>
+  <xacro:leg suffix="R4" reflect="-1" Ox="-0.1" Oy="-0.115" Oz="0.0" merus_link_length="0.13" carpus_link_length="0.058" manus_link_length ="0.09" fore_leg_Rz="0.0" dactyl="1" scale_x="0.001" scale_y="0.001" scale_z="0.005"/>  
+  
+
+</robot>

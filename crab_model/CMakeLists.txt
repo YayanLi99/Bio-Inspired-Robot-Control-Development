@@ -8,7 +8,8 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 #find_package(geometry_msgs REQUIRED)
-#find_package(rclcpp REQUIRED)s
+find_package(rclcpp REQUIRED)
+find_package(rclpy REQUIRED)
 #find_package(sensor_msgs REQUIRED)
 #find_package(tf2_ros REQUIRED)
 #find_package(rf2_geometry_msgs REQUIRED)
@@ -26,7 +27,7 @@ find_package(ament_cmake REQUIRED)
 #  rf2_geometry_msgs
 #)
 
-install(DIRECTORY description launch meshes config
+install(DIRECTORY description launch meshes config world
   DESTINATION share/${PROJECT_NAME}) 
 
 #install(TARGETS crab_model

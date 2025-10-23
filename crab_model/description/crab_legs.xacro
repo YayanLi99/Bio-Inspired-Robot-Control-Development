@@ -20,14 +20,14 @@
 
         <link name="coxa_link_${suffix}">
             <visual>
-                <origin xyz="${coxa_link_Ox} ${coxa_link_Oy} ${coxa_link_Oz}" rpy=" 0.0  ${coxa_link_Ry} 0.0"/>
+                <origin xyz="${coxa_link_Ox} ${coxa_link_Oy} ${coxa_link_Oz}" rpy=" 0.0  0.0 0.0"/>
                 <geometry>
                     <cylinder length="${coxa_link_length}" radius="${coxa_link_radius}"/>
                 </geometry>
                 <material name="blue"/>
             </visual>
             <collision>
-                <origin xyz="${coxa_link_Ox} ${coxa_link_Oy} ${coxa_link_Oz}" rpy=" 0.0  ${coxa_link_Ry} 0.0"/>
+                <origin xyz="${coxa_link_Ox} ${coxa_link_Oy} ${coxa_link_Oz}" rpy=" 0.0  0.0 0.0"/>
                 <geometry>
                     <cylinder length="${coxa_link_length}" radius="${coxa_link_radius}"/>
                 </geometry>
@@ -144,14 +144,14 @@
                 <visual>
                     <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
                     <geometry>
-                        <mesh filename="package://crab_model/meshes/dactyl.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
+                        <mesh filename="file://$(find crab_model)/meshes/dactyl.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
                     </geometry>
                     <material name="red"/>
                 </visual>
                 <collision>
                     <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
                     <geometry>
-                        <mesh filename="package://crab_model/meshes/dactyl.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
+                        <mesh filename="file://$(find crab_model)/meshes/dactyl.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
                     </geometry>
                 </collision>
                 <xacro:inertial_sphere mass="${dactyl_mass}" radius="${dactyl_radius}">
@@ -165,14 +165,14 @@
                 <visual>
                     <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
                     <geometry>
-                        <mesh filename="package://crab_model/meshes/crab_claw.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
+                        <mesh filename="file://$(find crab_model)/meshes/crab_claw.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
                     </geometry>
                     <material name="red"/>
                 </visual>
                 <collision>
                     <origin xyz="${dactyl_link_Ox} ${dactyl_link_Oy} ${dactyl_link_Oz}" rpy="0.0 0.0 0.0"/>
                     <geometry>
-                        <mesh filename="package://crab_model/meshes/crab_claw.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
+                        <mesh filename="file://$(find crab_model)/meshes/crab_claw.stl" scale="${scale_x} ${scale_y} ${scale_z}"/>
                     </geometry>
                 </collision>
                 <xacro:inertial_sphere mass="${dactyl_mass}" radius="${dactyl_radius}">

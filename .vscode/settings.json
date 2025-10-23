@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/home/yayanli/crab_ws/src/crab_model"
+    "cmake.sourceDirectory": "/home/yayanli/crab_ws/src/crab_model",
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <gazebo>
+    <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher</robot_param_node>
+      <parameters>$(find crab_model)/config/my_controller.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+
+  <ros2_control name="CrabSim" type="system">
+      <hardware>
+          <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      </hardware>
+
+
+      <xacro:leg_control suffix="F1" reflect="1"/>
+      <xacro:leg_control suffix="F2" reflect="-1"/>
+      <xacro:leg_control suffix="L1" reflect="1"/>
+      <xacro:leg_control suffix="L2" reflect="1"/>
+      <xacro:leg_control suffix="L3" reflect="1"/>
+      <xacro:leg_control suffix="L4" reflect="1"/>
+      <xacro:leg_control suffix="R1" reflect="-1"/>
+      <xacro:leg_control suffix="R2" reflect="-1"/>
+      <xacro:leg_control suffix="R3" reflect="-1"/>
+      <xacro:leg_control suffix="R4" reflect="-1"/>
+  </ros2_control>  
+
+
+</robot>
